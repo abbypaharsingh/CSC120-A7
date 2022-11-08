@@ -5,8 +5,8 @@ public class Building {
     protected String name;
     protected String address;
     protected int nFloors;
-    private int activeFloor = -1; // Default value indicating we are not inside this building
-
+    protected int activeFloor = -1; // Default value indicating we are not inside this building
+    
     /* Default constructor */
     public Building() {
         this("<Name Unknown>", "<Address Unknown>", 1);
@@ -48,10 +48,12 @@ public class Building {
 
     /* Navigation methods */
     public Building enter() {
+        if (activeFloor != -1) {
+            throw new RuntimeException("You are already inside this Building.");
+        }
         this.activeFloor = 1;
         System.out.println("You are now inside " + this.name + " on the ground floor.");
-        return this; // Return a pointer to the current building
-    }
+        return this;} // Return a pointer to the current building
 
     public Building exit() {
         if (this.activeFloor == -1) {
